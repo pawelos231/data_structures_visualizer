@@ -6,20 +6,40 @@
 
 int main(void)
 {
-	LinkedList<int> list;
-	for (int i = 1; i <= 6; i++) {
-		list.push_node(i);
+	
+	const int screenWidth = 800;
+	const int screenHeight = 450;
+
+	InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
+
+	Vector2 ballPosition = { (float)screenWidth / 2, (float)screenHeight / 2 };
+
+	SetTargetFPS(60);              
+
+	
+	while (!WindowShouldClose())    
+	{
+	
+		if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
+		if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
+		if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
+		if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+		
+
+		
+		BeginDrawing();
+
+		ClearBackground(RAYWHITE);
+
+		DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+
+		DrawCircleV(ballPosition, 50, MAROON);
+
+		EndDrawing();
+		
 	}
 
-	LOG("elements in list:")
-		list.log_nodes();
-	list.delete_node(2);
-	LOG("elements in list:")
-		list.log_nodes();
-	list.insert_node(3, 10);
-
-	LOG("Elements in list:")
-		list.log_nodes();
+	CloseWindow();        
 
 	return 0;
 }
