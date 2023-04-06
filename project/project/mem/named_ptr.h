@@ -8,46 +8,33 @@ private:
 
 
 public:
-	NamedPtr() {
-		pointer = nullptr;
-		refcount = new unsigned int(0);
+	NamedPtr(T* ptr=nullptr) {
+		this->pointer = ptr;
+		this->refcount = new unsigned int(1);
 	}
 
-	NamedPtr(const NamedPtr& obj) {
+	NamedPtr(NamedPtr<T>& obj) {
 		this->pointer = obj.pointer;
 		this->refcount = obj.refcount;
-		if (this->pointer == nullptr) {
-			(*this->count)++;
-		}
+		(*this->refcount)++;
 	}
 
-	NamedPtr(NamedPtr&& obj) {
-		this->pointer = obj.pointer;
-		this->refcount = obj.refcount;
-		obj.pointer = nullptr;
-		obj.refcount = nullptr;
+	T* get() {
+		return this->pointer;
+	}
+	T* operator->(){
+		return this->pointer;
+	}
+	T& operator*() {
+		return (*this->pointer);
 	}
 
-	NamedPtr&operator=(NamedPtr&& obj) {
-		this->pointer = obj.pointer;
-		this->refcount = obj.refcount;
-		obj.pointer = nullptr;
-		obj.refcount = nullptr;
-	}
-
-	~NamedPtr(NamedPtr&& obj) {
+	~NamedPtr() {
 		(*this->refcount)--;
 		if ((*this->refcount) <= 0) {
 			delete this->refcount;
 			delete this->pointer;
 		}
-	}
-	
-	T* operator->() const {
-		return this->pointer;
-	}
-	T& operator*() const {
-		return this->pointer;
 	}
 
 };

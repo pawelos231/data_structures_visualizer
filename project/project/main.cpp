@@ -4,7 +4,7 @@
 
 int main(void)
 {
-	const int screenWidth = 800;
+	/*const int screenWidth = 800;
 	const int screenHeight = 450;
 
 	InitWindow(screenWidth, screenHeight, "RayLib [core] example - keyboard input");
@@ -26,7 +26,18 @@ int main(void)
 		EndDrawing();
 	}
 
-	CloseWindow();
+	CloseWindow();*/
+	LinkedList<int> list;
+
+	for (int i = 0; i < 1000000; i++) {
+		std::cout << i << std::endl;
+		list.push(1);
+	}
+	list.print();
+	for (int i = 0; i < 1000000; i++) {
+		list.remove(0);
+	}
+	list.print();
 
 	return 0;
 }
