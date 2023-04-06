@@ -6,8 +6,6 @@
 
 int main(void)
 {
-
-
 	LinkedList<int> list;
 	for (int i = 1; i <= 6; i++) {
 		list.push_node(i);
@@ -22,9 +20,6 @@ int main(void)
 
 	LOG("Elements in list:")
 		list.log_nodes();
-
-	
-
 
 	return 0;
 }

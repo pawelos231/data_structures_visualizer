@@ -104,3 +104,5 @@ void LinkedList<T>::delete_node(int nodeToDelete) {
 	temp2->next = temp->next;
 	delete temp;
 }
+
+template class LinkedList<int>;
