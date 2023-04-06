@@ -1,9 +1,8 @@
 #pragma once
+
 #include<iostream>
 
-const char* EMPTY_LIST = "empty list";
-const char* INVALID_NUMBER = "the given number is too large or too small";
-const char* TOO_LARGE = "too large number";
+const char* INVALID_INDEX = "Index out of range";
 
 template <typename T>
 class LinkedList {
@@ -12,23 +11,32 @@ private:
 	public:
 		T data;
 		Node* next;
+
 		Node() {
-			data = 0;
 			next = NULL;
 		};
+
 		Node(int data) {
 			this->data = data;
 			this->next = NULL;
 		}
 	};
 	Node* head;
+	int len;
 public:
 	LinkedList() {
 		head = NULL;
 	}
-	void push_node(T data) {
+
+	int length() {
+		return len;
+	}
+
+	void push(T data) {
 		Node* newNode = new Node(data);
 		Node* temp = head;
+
+		len++;
 
 		if (head == NULL) {
 			head = newNode;
@@ -41,8 +49,8 @@ public:
 
 		temp->next = newNode;
 	};
-	void insert_node(int PointToInsert, T data) {
 
+	void insert(int index, T data) {
 		Node* newNode = new Node(data);
 		Node* temp = head;
 		Node* temp2 = NULL;
@@ -51,72 +59,94 @@ public:
 		if (head == NULL) {
 			head = newNode;
 		}
+
 		while (temp != NULL) {
 			temp = temp->next;
 			helperValue++;
 		}
-		if (helperValue < PointToInsert || PointToInsert < 0) {
-			std::cout << INVALID_NUMBER << std::endl;
-			return;
+
+		if (helperValue < index || index < 0) {
+			throw std::out_of_range(INVALID_INDEX);
 		}
+
 		temp = head;
 
-		for (int i = 0; i < PointToInsert - 1; i++) {
+		for (int i = 0; i < index - 1; i++) {
 			temp2 = temp;
 			temp = temp->next;
 		}
+
 		if (temp2 == NULL || temp2->next == NULL) {
 			return;
 		}
+
 		temp2->next = newNode;
 		newNode->next = temp;
-	};
-	void log_nodes() {
-		if (head == NULL) {
-
-			std::cout << EMPTY_LIST << std::endl;
-			return;
-		}
-		Node* temp = head;
-		while (temp != NULL) {
-			std::cout << temp->data << std::endl;
-			temp = temp->next;
-		}
+		len++;
 	};
 
-	void delete_node(int nodeToDelete) {
+	void remove(int index) {
 		Node* temp = head;
 		Node* temp2 = NULL;
-		int LinkedListLen = 0;
-		if (head == NULL) {
-			std::cout << EMPTY_LIST << std::endl;
-			return;
-		}
-		while (temp->next != NULL) {
-			temp = temp->next;
-			LinkedListLen++;
-		}
-		if (LinkedListLen < nodeToDelete) {
-			std::cout << TOO_LARGE << std::endl;
-			return;
+
+		if (len <= index) {
+			throw std::out_of_range(INVALID_INDEX);
 		}
 
 		temp = head;
-		if (nodeToDelete == 1) {
+		if (index == 0) {
 			head = head->next;
 			delete temp;
+			len--;
 			return;
 		}
-		for (int i = 0; i < nodeToDelete; i++) {
+
+		for (int i = 0; i < index; i++) {
 			temp2 = temp;
 			temp = temp->next;
 		}
+
 		if (temp2 == NULL || temp2->next == NULL) {
 			return;
 		}
 
 		temp2->next = temp->next;
 		delete temp;
+		len--;
+	};
+
+	void remove_elegant(unsigned int index) {
+		if (index >= len)
+			throw std::out_of_range(INVALID_INDEX);
+
+		Node** ptr = &head;
+		Node* target = head;
+
+		for (int i = 0; i < index; i++)
+			target = target->next;
+
+		while (*ptr != target)
+			ptr = &(*ptr)->next;
+
+		*ptr = target->next;
+		delete target;
+		len--;
+	};
+
+	void print() {
+		std::cout << "[";
+		if (head == NULL) {
+			std::cout << "]" << std::endl;
+			return;
+		}
+
+		Node* temp = head;
+		while (temp != NULL) {
+			std::cout << temp->data << ", ";
+			temp = temp->next;
+		}
+
+		std::cout << "\b\b]" << std::endl;
 	};
 };
 
