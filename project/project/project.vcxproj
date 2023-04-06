@@ -138,10 +138,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="structures\linked_list\linked_list.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="structures\linked_list\linked_list.h" />
+    <ClInclude Include="structures\hash_map.h" />
+    <ClInclude Include="structures\linked_list.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

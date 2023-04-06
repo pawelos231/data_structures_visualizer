@@ -1,6 +1,9 @@
 #pragma once
 #include<iostream>
 
+const char* EMPTY_LIST = "empty list";
+const char* INVALID_NUMBER = "the given number is too large or too small";
+const char* TOO_LARGE = "too large number";
 
 template <typename T>
 class LinkedList {
@@ -53,7 +56,7 @@ public:
 			helperValue++;
 		}
 		if (helperValue < PointToInsert || PointToInsert < 0) {
-			std::cout << "the given number is too large or too small" << std::endl;
+			std::cout << INVALID_NUMBER << std::endl;
 			return;
 		}
 		temp = head;
@@ -71,7 +74,7 @@ public:
 	void log_nodes() {
 		if (head == NULL) {
 
-			std::cout << "empty list" << std::endl;
+			std::cout << EMPTY_LIST << std::endl;
 			return;
 		}
 		Node* temp = head;
@@ -80,12 +83,13 @@ public:
 			temp = temp->next;
 		}
 	};
+
 	void delete_node(int nodeToDelete) {
 		Node* temp = head;
 		Node* temp2 = NULL;
 		int LinkedListLen = 0;
 		if (head == NULL) {
-			std::cout << "empty list" << std::endl;
+			std::cout << EMPTY_LIST << std::endl;
 			return;
 		}
 		while (temp->next != NULL) {
@@ -93,7 +97,7 @@ public:
 			LinkedListLen++;
 		}
 		if (LinkedListLen < nodeToDelete) {
-			std::cout << "too large number" << std::endl;
+			std::cout << TOO_LARGE << std::endl;
 			return;
 		}
 
@@ -113,7 +117,6 @@ public:
 
 		temp2->next = temp->next;
 		delete temp;
-
 	};
 };
 

@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "structures/linked_list/linked_list.h"
+#include "structures/linked_list.h"
 #include <iostream>
 
 #define LOG(x){std::cout<<x<<std::endl;}
