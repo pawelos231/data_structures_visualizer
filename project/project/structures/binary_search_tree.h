@@ -38,7 +38,7 @@ public:
 	BST* find_right_min_val(BST* curr) {
 		//iterating to the utmost left leaf
 		BST* temp = curr;
-		while (curr != NULL && curr->left != NULL) {
+		while (curr != nullptr && curr->left != nullptr) {
 			curr = curr->left;
 		}
 		return curr;
@@ -55,15 +55,15 @@ public:
 			root->right = delete_node(root->right, nodeToDelete);
 		}
 		else {
-			if (root->left == NULL && root->right == NULL) {
+			if (root->left == nullptr && root->right == nullptr) {
 				return NULL;
 			}
-			else if (root->left == NULL) {
+			else if (root->left == nullptr) {
 				BST* temp = root->right;
 				delete root;
 				return temp;
 			}
-			else if (root->right == NULL) {
+			else if (root->right == nullptr) {
 				BST* temp = root->left;
 				delete root;
 				return temp;
@@ -76,7 +76,7 @@ public:
 	}
 
 	void InorderTraversal(BST* root) {
-		if (root == NULL) {
+		if (root == nullptr) {
 			return;
 		}
 		InorderTraversal(root->left);
