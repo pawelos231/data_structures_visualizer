@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="structures\binary_search_tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structures\hash_map.h" />

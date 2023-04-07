@@ -1,5 +1,4 @@
 #pragma once
-
 #include<iostream>
 
 const char* INVALID_INDEX = "Index out of range";
