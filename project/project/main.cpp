@@ -2,42 +2,34 @@
 #include "structures/linked_list.h"
 #include <iostream>
 
+void draw_centered(const char* text, int height, int fontSize) {
+	int width = MeasureText(text, fontSize);
+	DrawText(text, (GetScreenWidth() - width) / 2, height, fontSize, DARKGRAY);
+}
+
 int main(void)
 {
-	/*const int screenWidth = 800;
+	const int screenWidth = 800;
 	const int screenHeight = 450;
 
-	InitWindow(screenWidth, screenHeight, "RayLib [core] example - keyboard input");
-	SetTargetFPS(60);              
+	InitWindow(screenWidth, screenHeight, "Data Structure Visualiser");
+	SetTargetFPS(60);
 
 	Vector2 ballPosition = { (float)screenWidth / 2, (float)screenHeight / 2 };
 
-	while (!WindowShouldClose())    
+	while (!WindowShouldClose())
 	{
-		if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-		if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-		if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-		if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
-
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
-		DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
-		DrawCircleV(ballPosition, 50, MAROON);
+
+		draw_centered("Data Structure Visualiser", 20, 25);
+		draw_centered("Pawel Wilk", 45, 20);
+
 		EndDrawing();
 	}
 
-	CloseWindow();*/
-	LinkedList<int> list;
+	CloseWindow();
 
-	for (int i = 0; i < 1000000; i++) {
-		std::cout << i << std::endl;
-		list.push(1);
-	}
-	list.print();
-	for (int i = 0; i < 1000000; i++) {
-		list.remove(0);
-	}
-	list.print();
-
+	return 0;
 	return 0;
 }

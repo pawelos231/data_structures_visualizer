@@ -1,7 +1,6 @@
 #pragma once
 
 #include<iostream>
-#include "../mem/named_ptr.h"
 
 const char* INVALID_INDEX = "Index out of range";
 
@@ -11,22 +10,22 @@ private:
 	class Node {
 	public:
 		T data;
-		NamedPtr<Node> next;
+		Node* next;
 
 		Node() {
-			next = NamedPtr<Node>(nullptr);
+			next = NULL;
 		};
+
 		Node(T data) {
 			this->data = data;
-			this->next = nullptr;
+			this->next = NULL;
 		}
-
 	};
-	NamedPtr<Node> head;
+	Node* head;
 	int len;
 public:
 	LinkedList() {
-		head = NamedPtr<Node>(nullptr);
+		head = NULL;
 	}
 
 	int length() {
@@ -34,18 +33,17 @@ public:
 	}
 
 	void push(T data) {
-
-		NamedPtr<Node> newNode(new Node(data));
-		NamedPtr<Node> temp = head;
+		Node* newNode = new Node(data);
+		Node* temp = head;
 
 		len++;
 
-		if (head.get() == nullptr) {
+		if (head == NULL) {
 			head = newNode;
 			return;
 		}
 
-		while (temp.get() != nullptr && temp.get()->next.get() != nullptr) {
+		while (temp != NULL && temp->next != NULL) {
 			temp = temp->next;
 		}
 
@@ -53,17 +51,17 @@ public:
 	};
 
 	void insert(int index, T data) {
-		NamedPtr<Node> newNode = NamedPtr<Node>(new Node(data));
-		NamedPtr<Node> temp = head;
-		NamedPtr<Node> temp2 = NamedPtr<Node>(nullptr);
+		Node* newNode = new Node(data);
+		Node* temp = head;
+		Node* temp2 = NULL;
 		int helperValue = 0;
 
-		if (head.get() == nullptr) {
+		if (head == NULL) {
 			head = newNode;
 		}
 
-		while (temp.get() != nullptr) {
-			temp = temp.get()->next;
+		while (temp != NULL) {
+			temp = temp->next;
 			helperValue++;
 		}
 
@@ -75,10 +73,10 @@ public:
 
 		for (int i = 0; i < index - 1; i++) {
 			temp2 = temp;
-			temp = temp.get()->next;
+			temp = temp->next;
 		}
 
-		if (temp2.get() == nullptr || temp2.get()->next == nullptr) {
+		if (temp2 == NULL || temp2->next == NULL) {
 			return;
 		}
 
@@ -88,8 +86,8 @@ public:
 	};
 
 	void remove(int index) {
-		NamedPtr<Node> temp = head;
-		NamedPtr<Node> temp2;
+		Node* temp = head;
+		Node* temp2 = NULL;
 
 		if (len <= index) {
 			throw std::out_of_range(INVALID_INDEX);
@@ -98,6 +96,7 @@ public:
 		temp = head;
 		if (index == 0) {
 			head = head->next;
+			delete temp;
 			len--;
 			return;
 		}
@@ -107,29 +106,46 @@ public:
 			temp = temp->next;
 		}
 
-		if (temp2.get() == nullptr || temp2.get()->next.get() == nullptr) {
+		if (temp2 == NULL || temp2->next == NULL) {
 			return;
 		}
 
 		temp2->next = temp->next;
-		
+		delete temp;
+		len--;
+	};
+
+	void remove_elegant(unsigned int index) {
+		if (index >= len)
+			throw std::out_of_range(INVALID_INDEX);
+
+		Node** ptr = &head;
+		Node* target = head;
+
+		for (int i = 0; i < index; i++)
+			target = target->next;
+
+		while (*ptr != target)
+			ptr = &(*ptr)->next;
+
+		*ptr = target->next;
+		delete target;
 		len--;
 	};
 
 	void print() {
 		std::cout << "[";
-		if (head.get() == nullptr) {
+		if (head == NULL) {
 			std::cout << "]" << std::endl;
 			return;
 		}
 
-		NamedPtr<Node> temp = head;
-		while (temp.get() != nullptr) {
-			std::cout << temp.get()->data << ", ";
+		Node* temp = head;
+		while (temp != NULL) {
+			std::cout << temp->data << ", ";
 			temp = temp->next;
 		}
 
 		std::cout << "\b\b]" << std::endl;
 	};
 };
-
