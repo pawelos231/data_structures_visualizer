@@ -12,19 +12,19 @@ private:
 		Node* next;
 
 		Node() {
-			next = NULL;
+			next = nullptr;
 		};
 
 		Node(T data) {
 			this->data = data;
-			this->next = NULL;
+			this->next = nullptr;
 		}
 	};
 	Node* head;
 	int len;
 public:
 	LinkedList() {
-		head = NULL;
+		head = nullptr;
 	}
 
 	int length() {
@@ -37,12 +37,12 @@ public:
 
 		len++;
 
-		if (head == NULL) {
+		if (head == nullptr) {
 			head = newNode;
 			return;
 		}
 
-		while (temp != NULL && temp->next != NULL) {
+		while (temp != nullptr && temp->next != nullptr) {
 			temp = temp->next;
 		}
 
@@ -59,7 +59,7 @@ public:
 			head = newNode;
 		}
 
-		while (temp != NULL) {
+		while (temp != nullptr) {
 			temp = temp->next;
 			helperValue++;
 		}
@@ -75,7 +75,7 @@ public:
 			temp = temp->next;
 		}
 
-		if (temp2 == NULL || temp2->next == NULL) {
+		if (temp2 == nullptr || temp2->next == nullptr) {
 			return;
 		}
 
@@ -86,7 +86,7 @@ public:
 
 	void remove(int index) {
 		Node* temp = head;
-		Node* temp2 = NULL;
+		Node* temp2 = nullptr;
 
 		if (len <= index) {
 			throw std::out_of_range(INVALID_INDEX);
@@ -105,7 +105,7 @@ public:
 			temp = temp->next;
 		}
 
-		if (temp2 == NULL || temp2->next == NULL) {
+		if (temp2 == nullptr || temp2->next == nullptr) {
 			return;
 		}
 
@@ -134,13 +134,13 @@ public:
 
 	void print() {
 		std::cout << "[";
-		if (head == NULL) {
+		if (head == nullptr) {
 			std::cout << "]" << std::endl;
 			return;
 		}
 
 		Node* temp = head;
-		while (temp != NULL) {
+		while (temp != nullptr) {
 			std::cout << temp->data << ", ";
 			temp = temp->next;
 		}
