@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include "../mem/named_ptr.h"
 
 const char* INVALID_INDEX = "Index out of range";
 
@@ -9,7 +10,7 @@ private:
 	class Node {
 	public:
 		T data;
-		Node* next;
+		NamedPtr<Node> next;
 
 		Node() {
 			next = nullptr;
@@ -20,7 +21,7 @@ private:
 			this->next = nullptr;
 		}
 	};
-	Node* head;
+	NamedPtr<Node> head;
 	int len;
 public:
 	LinkedList() {
@@ -32,8 +33,8 @@ public:
 	}
 
 	void push(T data) {
-		Node* newNode = new Node(data);
-		Node* temp = head;
+		NamedPtr<Node> newNode(new Node(data));
+		NamedPtr<Node> temp(head);
 
 		len++;
 
@@ -138,8 +139,7 @@ public:
 			std::cout << "]" << std::endl;
 			return;
 		}
-
-		Node* temp = head;
+		NamedPtr<Node> temp = head;
 		while (temp != nullptr) {
 			std::cout << temp->data << ", ";
 			temp = temp->next;

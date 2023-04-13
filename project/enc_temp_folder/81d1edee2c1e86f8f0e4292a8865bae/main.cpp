@@ -23,7 +23,14 @@ const char* STRUCTURES[] = {
 
 int main(void)
 {
-	
+	{
+		LinkedList<int> list;
+		for (int i = 0; i < 10000; i++) {
+			list.push(i);
+		}
+		list.print();
+
+	};
 
 	const int screenWidth = 1280;
 	const int screenHeight = 720;
