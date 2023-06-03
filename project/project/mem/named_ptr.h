@@ -12,6 +12,7 @@ public:
 
 	~NamedPtr()
 	{
+
 		(*m_refCount)--;
 		if (*m_refCount == 0) {
 			delete m_ptr;

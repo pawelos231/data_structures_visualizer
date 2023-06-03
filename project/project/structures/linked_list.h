@@ -5,7 +5,7 @@
 const char* INVALID_INDEX = "Index out of range";
 
 template <typename T>
-class LinkedList {
+class SinglyLinkedList {
 private:
 	class Node {
 	public:
@@ -24,9 +24,10 @@ private:
 	NamedPtr<Node> head;
 	int len;
 public:
-	LinkedList() {
+	SinglyLinkedList() {
 		head = nullptr;
 	}
+	
 
 	int length() {
 		return len;
