@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mem\named_ptr.h" />
+    <ClInclude Include="structures\disjoint_set.h" />
     <ClInclude Include="structures\hash_map.h" />
     <ClInclude Include="structures\linked_list.h" />
   </ItemGroup>

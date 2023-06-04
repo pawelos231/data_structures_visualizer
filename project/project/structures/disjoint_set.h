@@ -1,14 +1,17 @@
 #include <vector>
+#include <stdexcept>
 
 class DisjointSet {
 
 private:
 	std::vector<int> parent;
 	std::vector<int> rank;
+	int size;
 
 	DisjointSet(int size){
 		parent.resize(size);
 		rank.resize(size, 0);
+		this->size = size;
 
 		for (int i = 0; i < size; i++) {
 			parent[i] = i;
@@ -16,6 +19,11 @@ private:
 	}
 
 	int find(int x) {
+
+		if (x < 0 || x >= size) {
+			throw std::out_of_range("Index out of bounds");
+		}
+
 		if (parent[x] != x) {
 			// Path compression: Make the parent of x point to the root directly
 			parent[x] = find(parent[x]);
@@ -43,5 +51,9 @@ private:
 			rank[rootA]++;
 		}
 
+	}
+
+	bool sameSet(int a, int b) {
+		return find(a) == find(b);
 	}
 };
