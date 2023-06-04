@@ -34,7 +34,7 @@ public:
 		this->buckets.resize(capacity);
 	}
 
-	void insert(KeyType& const key, ValueType& const value) {
+	void insert(const KeyType& key, const ValueType& value) {
 
 		size_t bucketIndex = this->getBucketIndex(key);
 
@@ -53,7 +53,7 @@ public:
 		}
 	}
 
-	ValueType get(KeyType& const key) const {
+	ValueType get(const KeyType& key) const {
 
 		size_t bucketIndex = this->getBucketIndex(key);
 
@@ -66,7 +66,7 @@ public:
 
 	}
 
-	void remove(KeyType& const key) {
+	void remove(const KeyType& key) const {
 		size_t bucketIndex = this->getBucketIndex(key);
 
 		for (auto it = buckets[bucketIndex].begin(); it != buckets[bucketIndex].end(); ++it) {
@@ -78,6 +78,33 @@ public:
 		}
 		throw std::out_of_range("Key not found");
 
+	}
+
+	size_t getSize() const {
+		return size;
+	}
+
+	bool isEmpty() const {
+		return size == 0;
+	}
+
+private:
+
+	void rehash(size_t updatedCap) {
+		std::vector<Bucket> newBuckets(updatedCap)
+		size_t oldCapacity = capacity;
+		capacity = updatedCap;
+		size = 0;
+
+		for (size_t i = 0; i < oldCapacity; ++i) {
+			for (const auto& kvp : buckets[i]) {
+				size_t newBucketIndex = this->getBucketIndex(kvp.key);
+				newBuckets[newBucketIndex].push_back(kvp);
+				size++;
+			}
+		}
+
+		this->buckets = std::move(newBuckets);
 
 	}
 
