@@ -141,6 +141,7 @@
     <ClCompile Include="structures\binary_search_tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="algorithms\kruskal.h" />
     <ClInclude Include="mem\named_ptr.h" />
     <ClInclude Include="structures\disjoint_set.h" />
     <ClInclude Include="structures\hash_map.h" />

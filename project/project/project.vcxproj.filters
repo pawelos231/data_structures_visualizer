@@ -35,5 +35,8 @@
     <ClInclude Include="structures\disjoint_set.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="algorithms\kruskal.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

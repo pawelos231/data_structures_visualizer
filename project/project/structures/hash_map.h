@@ -5,8 +5,7 @@
 #include <stdexcept>
 
 
-//i decided to use seperate chaining, bucket refers to datastructure i am storing it in in this case its linked list
-//for hashing function i choose standard library std::hash instead of relieing on my own implementetion
+// I decided to use separate chaining, where each bucket refers to the data structure I am storing the elements in.In this case, I am using a linked list.Instead of relying on my own implementation of a hashing function, I chose to use the standard library's std::hash function.
 
 template<typename KeyType, typename ValueType>
 class HashMap {
