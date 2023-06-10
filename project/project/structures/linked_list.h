@@ -12,24 +12,20 @@ private:
 		T data;
 		NamedPtr<Node> next;
 
-		Node() {
-			next = nullptr;
-		};
+		Node() : next(nullptr) {}
 
-		Node(T data) {
-			this->data = data;
-			this->next = nullptr;
-		}
+
+		explicit Node(T data) : data(data), next(nullptr) {}
+
 	};
 	NamedPtr<Node> head;
 	int len;
 public:
-	SinglyLinkedList() {
-		head = nullptr;
-	}
-	
 
-	int length() {
+	SinglyLinkedList() : head(nullptr), len(0) {}
+
+
+	int length() const {
 		return len;
 	}
 

@@ -10,19 +10,12 @@ private:
 
 public:
 
-	BST() {
-		this->data = 0;
-		this->left = nullptr;
-		this->right = nullptr;
-	}
+	BST(): data(0), left(nullptr), right(nullptr) {}
 
-	BST(int dataGiven) {
-		this->data = dataGiven;
-		this->left = nullptr;
-		this->right = nullptr;
-	}
+	explicit BST(int dataG) : data(dataG), left(nullptr), right(nullptr) {}
 
-	BST* insert_node(BST* root, int data) {
+
+	BST* insertNode(BST* root, int data) {
 		if (!root) {
 			return new BST(data);
 		}
@@ -35,16 +28,22 @@ public:
 		return root;
 	}
 
-	BST* find_right_min_val(BST* curr) {
-		//iterating to the utmost left leaf
-		BST* temp = curr;
-		while (curr != nullptr && curr->left != nullptr) {
-			curr = curr->left;
+
+	BST* findMinValue(BST* root) {
+		if (!root) {
+			return nullptr;
 		}
-		return curr;
+
+		BST* current = root;
+		while (current->left) {
+			current = current->left;
+		}
+
+		return current;
 	}
 
-	BST* delete_node(BST* root, int nodeToDelete) {
+
+	BST* deleteNode(BST* root, int nodeToDelete) {
 		if (!root) {
 			return NULL;
 		}
@@ -68,18 +67,20 @@ public:
 				delete root;
 				return temp;
 			}
-			BST* node = find_right_min_val(root->right);
+			BST* node = findMinValue(root->right);
 			root->data = node->data;
-			root->right = delete_node(root->right, node->data);
+			root->right = deleteNode(root->right, node->data);
 		}
 		return root;
 	}
 
-	void InorderTraversal(BST* root) {
-		if (root == nullptr) {
+	void inorderTraversal(BST* root) {
+		if (!root) {
 			return;
 		}
-		InorderTraversal(root->left);
-		InorderTraversal(root->right);
+
+		inorderTraversal(root->left_);
+		std::cout << root->data_ << " ";
+		inorderTraversal(root->right_);
 	}
 };
