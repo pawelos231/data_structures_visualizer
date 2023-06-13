@@ -29,15 +29,16 @@ private:
 
 public:
 
-	HashMap(size_t initialCapacity = DEFAULT_CPACITY) : capacity(initialCapacity), size(0) {
+	HashMap(size_t initialCapacity = DEFAULT_CAPACITY) : capacity(initialCapacity), size(0) {
 		this->buckets.resize(capacity);
 	}
 
 	void insert(const KeyType& key, const ValueType& value) {
 
 		size_t bucketIndex = this->getBucketIndex(key);
+		std::cout << "hashed key: " << bucketIndex << std::endl;
 
-		for (const auto& kvp : buckets[getBucketIndex]) {
+		for (const auto& kvp : this->buckets[bucketIndex]) {
 			if (kvp.key == key) {
 				throw std::invalid_argument("Duplicate key");
 			}
@@ -50,6 +51,7 @@ public:
 			size_t newCapacity = capacity * 2;
 			this->rehash(newCapacity);
 		}
+		size++;
 	}
 
 	ValueType get(const KeyType& key) const {
@@ -58,7 +60,7 @@ public:
 
 		for (const auto& kvp : buckets[getBucketIndex]) {
 			if (kvp.key == key) {
-				return kvp.value
+				return kvp.value;
 			}
 		}
 		throw std::out_of_range("Key not found");
@@ -70,7 +72,7 @@ public:
 
 		for (auto it = buckets[bucketIndex].begin(); it != buckets[bucketIndex].end(); ++it) {
 			if (it->key == key) {
-				buckets[bucketIndex].erase(kvp);
+				buckets[bucketIndex].erase(it->key);
 				size--;
 				return;
 			}
@@ -87,10 +89,27 @@ public:
 		return size == 0;
 	}
 
+	size_t getCapacity() const{
+		return this->capacity;
+	}
+
+	void logHashMap() {
+		std::cout
+		<< "HASH MAP SIZE: " << this->getSize() << std::endl
+		<< "HASH MAP CAPACITY: " << this->getCapacity() << std::endl;
+
+		for (size_t i = 0; i < this->getCapacity(); i++) {
+			for (const auto& kvp : buckets[i]) {
+				std::cout << "key:value " <<
+				kvp.key << ":" << kvp.value << std::endl;
+			}
+		}
+	}
+
 private:
 
 	void rehash(size_t updatedCap) {
-		std::vector<Bucket> newBuckets(updatedCap)
+		std::vector<Bucket> newBuckets(updatedCap);
 		size_t oldCapacity = capacity;
 		capacity = updatedCap;
 		size = 0;

@@ -12,7 +12,7 @@ public:
 
 	BST(): data(0), left(nullptr), right(nullptr) {}
 
-	explicit BST(int dataG) : data(dataG), left(nullptr), right(nullptr) {}
+	explicit BST(int dataI) : data(dataI), left(nullptr), right(nullptr) {}
 
 
 	BST* insertNode(BST* root, int data) {
@@ -20,10 +20,10 @@ public:
 			return new BST(data);
 		}
 		if (data > root->data) {
-			root->right = insert_node(root->right, data);
+			root->right = insertNode(root->right, data);
 		}
 		else if (data < root->data) {
-			root->left = insert_node(root->left, data);
+			root->left = insertNode(root->left, data);
 		}
 		return root;
 	}
@@ -48,10 +48,10 @@ public:
 			return NULL;
 		}
 		if (nodeToDelete < root->data) {
-			root->left = delete_node(root->left, nodeToDelete);
+			root->left = deleteNode(root->left, nodeToDelete);
 		}
 		else if (nodeToDelete > root->data) {
-			root->right = delete_node(root->right, nodeToDelete);
+			root->right = deleteNode(root->right, nodeToDelete);
 		}
 		else {
 			if (root->left == nullptr && root->right == nullptr) {
@@ -79,8 +79,8 @@ public:
 			return;
 		}
 
-		inorderTraversal(root->left_);
-		std::cout << root->data_ << " ";
-		inorderTraversal(root->right_);
+		inorderTraversal(root->left);
+		std::cout << root->data << " ";
+		inorderTraversal(root->right);
 	}
 };
