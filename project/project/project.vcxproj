@@ -148,6 +148,7 @@
     <ClInclude Include="structures\disjoint_set.h" />
     <ClInclude Include="structures\hash_map.h" />
     <ClInclude Include="structures\linked_list.h" />
+    <ClInclude Include="structures\min_heap.h" />
     <ClInclude Include="structures\trie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

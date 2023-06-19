@@ -5,21 +5,21 @@
 
 template<typename T>
 class minHeap {
-	std::vector<T> heap;
 
-public:
 
 	struct PriorityItem {
 		int priority;
 		T data;
 	};
 
+	std::vector<PriorityItem> heap;
 
-	static_assert(std::is_integral_v
-	<typename PriorityItem::priority>, "Priority must be an integral type.");
+public:
 
-	minHeap() : heap(std::vector<T>()) {}
-	minHeap(const std::vector<T>& array) : heap(array) {
+
+
+	minHeap() : heap(std::vector<PriorityItem>()) {}
+	minHeap(const std::vector<PriorityItem>& array) : heap(array) {
 		//balance
 	}
 
@@ -46,18 +46,26 @@ public:
 
 	}
 
-	void heapifyUp() {
-
-	}
-
 	void heapifyDown() {
 
 	}
 
-	void insert(int priority, const T& data) {
-		PriorityItem PI{priority,data};
-		this->heap.push_back(PI)
+
+	template <typename U = T>
+	typename std::enable_if<!std::is_integral<U>::value>::type
+	insert(const T& data, int priority) {
+		PriorityItem PI{ priority, data };
+		this->heap.push_back(PI);
 	}
+
+	template <typename U = T>
+	typename std::enable_if<std::is_integral<U>::value>::type
+	insert(const T& data) {
+		std::cout << "siema" << std::endl;
+		PriorityItem PI{ 0, data };  
+		this->heap.push_back(PI);
+	}
+
 
 	void remove() {
 
