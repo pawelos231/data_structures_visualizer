@@ -143,6 +143,7 @@
     <ClCompile Include="structures\binary_search_tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="algorithms\heapSort.h" />
     <ClInclude Include="algorithms\kruskal.h" />
     <ClInclude Include="mem\named_ptr.h" />
     <ClInclude Include="structures\disjoint_set.h" />

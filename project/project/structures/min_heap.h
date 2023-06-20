@@ -107,8 +107,8 @@ public:
 		}
 	}
 
-	const std::string isEmpty() const {
-		return this->heap.size() ? "Not empty" : "Empty";
+	bool isEmpty() const {
+		return heap.empty();
 	}
 
 	const std::size_t size() const {

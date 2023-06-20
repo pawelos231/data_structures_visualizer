@@ -3,9 +3,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "./GUI/window.h"
-#include "./structures/hash_map.h"
-#include "./structures/linked_list.h"
-#include "./structures/min_heap.h"
+#include "./structures/max_heap.h"
 #include <iostream>
 
 const char* STRUCTURES[] = {
@@ -23,20 +21,20 @@ const char* STRUCTURES[] = {
 
 int main(void)
 {
-	MinHeap<std::string>* min = new MinHeap<std::string>();
+	MaxHeap<std::string>* max = new MaxHeap<std::string>();
 
-	min->insert("siema6", 8);
-	min->insert("siema5", 4);
-	min->insert("siema4", 3);
-	min->insert("siema3", 2);
-	min->insert("siema2", 6);
-	min->insert("siema9", 22);
-	min->insert("siema8", 63);
-	min->insert("siema7", 14);
-	min->insert("siema1", 1);
+	max->insert("siema8", 63);
+	max->insert("siema6", 8);
+	max->insert("siema5", 4);
+	max->insert("siema4", 3);
+	max->insert("siema3", 2);
+	max->insert("siema2", 6);
+	max->insert("siema9", 22);
+	max->insert("siema7", 14);
+	max->insert("siema1", 1);
 
-	min->logHeap();
+	max->logHeap();
 
-	std::cout << min->peek() << std::endl;
+	std::cout << max->peek() << std::endl;
 	return 0;
 }
