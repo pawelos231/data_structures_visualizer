@@ -17,8 +17,9 @@ private:
 	std::vector<PriorityItem> heap;
 
 public:
-	MinHeap() : heap(std::vector<PriorityItem>()) {}
-	MinHeap(int cap) : capacity(cap) {}
+	static const std::size_t DEFAULT_CAP = 100;
+	MinHeap() : heap(std::vector<PriorityItem>()), capacity(DEFAULT_CAP) {}
+	MinHeap(int cap): capacity(cap) {}
 	MinHeap(const std::vector<PriorityItem>& array) : heap(array) {
 		//balance
 	}
@@ -121,11 +122,9 @@ public:
 		return this->heap.front().data;
 	}
 
-	void LogHeap() const {
-		for (auto it = this->heap.begin(); it != this->heap.end(); ++it) {
-			int priority = it->priority;
-			T data = it->data;
-			std::cout << priority << ": " << data << std::endl;
+	void logHeap() const {
+		for (const auto& item : heap) {
+			std::cout << item.priority << ": " << item.data << std::endl;
 		}
 	}
 };

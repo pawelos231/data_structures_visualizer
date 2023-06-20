@@ -34,9 +34,8 @@ int main(void)
 	min->insert("siema8", 63);
 	min->insert("siema7", 14);
 	min->insert("siema1", 1);
-	min->remove();
 
-	min->LogHeap();
+	min->logHeap();
 
 	std::cout << min->peek() << std::endl;
 	return 0;
