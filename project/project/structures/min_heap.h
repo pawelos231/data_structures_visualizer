@@ -1,54 +1,74 @@
 #pragma once
 #include <vector>
 #include <type_traits>
+#include <stdexcept>
+#include <string>
 
 
 template<typename T>
-class minHeap {
+class MinHeap {
 
-
+private:
+	int capacity;
 	struct PriorityItem {
 		int priority;
 		T data;
 	};
-
 	std::vector<PriorityItem> heap;
 
 public:
-
-
-
-	minHeap() : heap(std::vector<PriorityItem>()) {}
-	minHeap(const std::vector<PriorityItem>& array) : heap(array) {
+	MinHeap() : heap(std::vector<PriorityItem>()) {}
+	MinHeap(int cap) : capacity(cap) {}
+	MinHeap(const std::vector<PriorityItem>& array) : heap(array) {
 		//balance
 	}
 
 
-	void swap() {
-
+	void swap(int index1, int index2) {
+		std::swap(heap[index1], heap[index2]);
 	}
 
-	void heapifyUp() {
+	void heapifyUp(int index) {
 
+		int parentIndex = getParentIndex(index);
+		if (parentIndex >= 0 && heap[index].priority < heap[parentIndex].priority) {
+			swap(parentIndex, index);
+			heapifyUp(parentIndex);
+		}
 	}
 
-	std::size_t parentIndex() {
+	void heapifyDown(int index) {
+		int leftChildIndex = getLeftChildIndex(index);
+		int rightChildIndex = getRightChildIndex(index);
+		int smallest = index;
 
+		if (leftChildIndex < heap.size() && heap[leftChildIndex].priority < heap[smallest].priority) {
+			smallest = leftChildIndex;
+		}
+
+		if (rightChildIndex < heap.size() && heap[rightChildIndex].priority < heap[smallest].priority) {
+			smallest = rightChildIndex;
+		}
+
+		if (smallest != index) {
+			swap(smallest, index);
+			heapifyDown(smallest);
+		}
+	}
+
+	int getParentIndex(int childIndex) {
+		return (childIndex - 1) / 2;
 	}
 
 
-	void rightChildIndex(T index) {
-
+	int getRightChildIndex(int parentIndex) {
+		return 2 * parentIndex + 2;
 	}
 
-	void leftChildIndex(T index) {
-
-
+	int getLeftChildIndex(int parentIndex) {
+		return 2 * parentIndex + 1;
 	}
 
-	void heapifyDown() {
-
-	}
 
 
 	template <typename U = T>
@@ -56,26 +76,41 @@ public:
 	insert(const T& data, int priority) {
 		PriorityItem PI{ priority, data };
 		this->heap.push_back(PI);
+		if (heap.size() > 1) {
+			this->heapifyUp(heap.size() - 1);
+		}
 	}
 
 	template <typename U = T>
 	typename std::enable_if<std::is_integral<U>::value>::type
 	insert(const T& data) {
-		std::cout << "siema" << std::endl;
-		PriorityItem PI{ 0, data };  
+		PriorityItem PI{ data, data };  //for now
 		this->heap.push_back(PI);
+		if (heap.size() > 1) {
+			this->heapifyUp(heap.size() - 1);
+		}
 	}
 
+	void clear() {
+		this->heap.clear();
+	}
 
 	void remove() {
-
+		if (heap.empty()) {
+			throw std::logic_error("Heap is empty");
+		}
+		heap[0] = heap.back();
+		heap.pop_back();
+		if (!heap.empty()) {
+			heapifyDown(0);
+		}
 	}
 
-	bool isEmpty() {
-
+	const std::string isEmpty() const {
+		return this->heap.size() ? "Not empty" : "Empty";
 	}
 
-	std::size_t size() {
+	const std::size_t size() const {
 		return this->heap.size();
 	}
 
@@ -84,5 +119,13 @@ public:
 			throw std::logic_error("Heap is empty");
 		}
 		return this->heap.front().data;
+	}
+
+	void LogHeap() const {
+		for (auto it = this->heap.begin(); it != this->heap.end(); ++it) {
+			int priority = it->priority;
+			T data = it->data;
+			std::cout << priority << ": " << data << std::endl;
+		}
 	}
 };

@@ -23,11 +23,21 @@ const char* STRUCTURES[] = {
 
 int main(void)
 {
-	minHeap<std::string>* min = new minHeap<std::string>();
+	MinHeap<std::string>* min = new MinHeap<std::string>();
 
-	min->insert("siema", 1);
-	min->insert("siema", 2);
-	min->insert("siema", 3);
+	min->insert("siema6", 8);
+	min->insert("siema5", 4);
+	min->insert("siema4", 3);
+	min->insert("siema3", 2);
+	min->insert("siema2", 6);
+	min->insert("siema9", 22);
+	min->insert("siema8", 63);
+	min->insert("siema7", 14);
+	min->insert("siema1", 1);
+	min->remove();
+
+	min->LogHeap();
+
 	std::cout << min->peek() << std::endl;
 	return 0;
 }
