@@ -39,6 +39,10 @@ public:
 		return newNode;
 	}
 
+	std::map<char, TrieNode*> getChildren() {
+		return this->children;
+	}
+
 	bool isEnd() const {
 		return this->endOfWord;
 	}
@@ -62,7 +66,8 @@ public:
 
 		for (auto ch : word) {
 			if (!node->containsKey(ch)) {
-				node->insertChild(ch);
+				std::cout << ch << std::endl;
+				node = node->insertChild(ch);
 			}
 			else {
 				node = node->getChild(ch);
@@ -70,12 +75,30 @@ public:
 		}
 	}
 
-	bool search() {
-
+	bool search(const std::string& word) {
+		TrieNode* node = root;
+		for (auto ch : word) {
+			if (node->containsKey(ch)) {
+				node = node->getChild(ch);
+			}
+			else {
+				return false;
+			}
+		}
+		return node->isEnd() ? true : false;
 	}
 
-	bool startsWith() {
-
+	bool startsWith(const std::string& prefix) {
+		TrieNode* node = root;
+		for (auto ch : prefix) {
+			if (node->containsKey(ch)) {
+				node = node->getChild(ch);
+			}
+			else {
+				return false;
+			}
+		}
+		return true;
 	}
 
 };

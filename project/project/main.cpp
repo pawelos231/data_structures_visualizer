@@ -3,7 +3,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "./GUI/window.h"
-#include "./structures/max_heap.h"
+#include "./structures/trie.h"
 #include <iostream>
 
 const char* STRUCTURES[] = {
@@ -21,20 +21,14 @@ const char* STRUCTURES[] = {
 
 int main(void)
 {
-	MaxHeap<std::string>* max = new MaxHeap<std::string>();
+	Trie trie;
+	trie.insert("apple");
+	trie.insert("apply");
+	trie.insert("banana");
 
-	max->insert("siema8", 63);
-	max->insert("siema6", 8);
-	max->insert("siema5", 4);
-	max->insert("siema4", 3);
-	max->insert("siema3", 2);
-	max->insert("siema2", 6);
-	max->insert("siema9", 22);
-	max->insert("siema7", 14);
-	max->insert("siema1", 1);
-
-	max->logHeap();
-
-	std::cout << max->peek() << std::endl;
+	bool hasPrefix = trie.startsWith("app"); 
+	bool hasPrefix2 = trie.startsWith("ban"); 
+	bool hasPrefix3 = trie.startsWith("foo");
+	std::cout << hasPrefix << hasPrefix2 << hasPrefix3 << std::endl;
 	return 0;
 }

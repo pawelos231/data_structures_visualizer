@@ -146,11 +146,19 @@
     <ClInclude Include="algorithms\heapSort.h" />
     <ClInclude Include="algorithms\kruskal.h" />
     <ClInclude Include="mem\named_ptr.h" />
+    <ClInclude Include="structures\avl_tree.h" />
+    <ClInclude Include="structures\bin_ind_tree.h" />
+    <ClInclude Include="structures\black_red_tree.h" />
     <ClInclude Include="structures\disjoint_set.h" />
     <ClInclude Include="structures\hash_map.h" />
+    <ClInclude Include="structures\k_d_tree.h" />
     <ClInclude Include="structures\linked_list.h" />
     <ClInclude Include="structures\max_heap.h" />
     <ClInclude Include="structures\min_heap.h" />
+    <ClInclude Include="structures\priority_queue.h" />
+    <ClInclude Include="structures\queue.h" />
+    <ClInclude Include="structures\segment_tree.h" />
+    <ClInclude Include="structures\stack.h" />
     <ClInclude Include="structures\trie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
