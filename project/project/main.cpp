@@ -4,6 +4,7 @@
 
 #include "./GUI/window.h"
 #include "./structures/trie.h"
+#include "./vmem/vmem.h";
 #include <iostream>
 
 const char* STRUCTURES[] = {
@@ -21,14 +22,16 @@ const char* STRUCTURES[] = {
 
 int main(void)
 {
-	Trie trie;
-	trie.insert("apple");
-	trie.insert("apply");
-	trie.insert("banana");
+	vmem memory;
 
-	bool hasPrefix = trie.startsWith("app"); 
-	bool hasPrefix2 = trie.startsWith("ban"); 
-	bool hasPrefix3 = trie.startsWith("foo");
+	Trie* trie = std::move(*memory.allocate<Trie>());
+	trie->insert("apple");
+	trie->insert("apply");
+	trie->insert("banana");
+
+	bool hasPrefix = trie->startsWith("app"); 
+	bool hasPrefix2 = trie->startsWith("ban"); 
+	bool hasPrefix3 = trie->startsWith("foo");
 	std::cout << hasPrefix << hasPrefix2 << hasPrefix3 << std::endl;
 	return 0;
 }

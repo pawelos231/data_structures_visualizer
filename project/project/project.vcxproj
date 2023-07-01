@@ -110,6 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,11 +142,11 @@
     <ClCompile Include="GUI\window.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="structures\binary_search_tree.h" />
+    <ClCompile Include="vmem\vmem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithms\heapSort.h" />
     <ClInclude Include="algorithms\kruskal.h" />
-    <ClInclude Include="mem\named_ptr.h" />
     <ClInclude Include="structures\avl_tree.h" />
     <ClInclude Include="structures\bin_ind_tree.h" />
     <ClInclude Include="structures\black_red_tree.h" />
