@@ -22,16 +22,23 @@ const char* STRUCTURES[] = {
 
 int main(void)
 {
-	vmem memory;
+	vmem<512> memory;
 
-	Trie* trie = std::move(*memory.allocate<Trie>());
-	trie->insert("apple");
-	trie->insert("apply");
-	trie->insert("banana");
+	auto trie_mem = memory.allocate<Trie>();
+	if (trie_mem) {
+		Trie& trie = **trie_mem;
+		trie.insert("apple");
+		trie.insert("apply");
+		trie.insert("banana");
 
-	bool hasPrefix = trie->startsWith("app"); 
-	bool hasPrefix2 = trie->startsWith("ban"); 
-	bool hasPrefix3 = trie->startsWith("foo");
-	std::cout << hasPrefix << hasPrefix2 << hasPrefix3 << std::endl;
+		bool hasPrefix = trie.startsWith("app");
+		bool hasPrefix2 = trie.startsWith("ban");
+		bool hasPrefix3 = trie.startsWith("foo");
+		std::cout << hasPrefix << hasPrefix2 << hasPrefix3 << std::endl;
+	}
+	else {
+		std::cout << "cringe not enough memory to make a trie :(" << std::endl;
+	}
+
 	return 0;
 }

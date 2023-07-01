@@ -1,20 +1,19 @@
 #include <bitset>
 #include <optional>
 
-#define VMEM_STACK_SIZE 2048
-
+template <size_t STACK_SIZE>
 struct vmem {
 private:
-	char memory[VMEM_STACK_SIZE];
-	std::bitset<VMEM_STACK_SIZE> free = ~std::bitset<VMEM_STACK_SIZE>();
-	std::bitset<VMEM_STACK_SIZE> mask;
+	char memory[STACK_SIZE];
+	std::bitset<STACK_SIZE> free = ~std::bitset<STACK_SIZE>();
+	std::bitset<STACK_SIZE> mask;
 public:
 	template <typename T>
 	std::optional<T*> allocate() {
 		const int size = sizeof(T);
-		const int iterSize = VMEM_STACK_SIZE - size;
+		const int iterSize = STACK_SIZE - size;
 
-		for (int i = 0; i < VMEM_STACK_SIZE; i++) {
+		for (int i = 0; i < STACK_SIZE; i++) {
 			if (i < size)
 				mask.set(i);
 			else
@@ -26,7 +25,7 @@ public:
 				free |= mask;
 				return new(memory + i)T;
 			}
-			mask >> 1;
+			mask = mask >> 1;
 		}
 
 		return {};
