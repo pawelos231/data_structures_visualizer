@@ -1,4 +1,6 @@
 #include <iostream>
+#include <queue>
+
 using namespace std;
 
 class BST {
@@ -11,7 +13,6 @@ private:
 public:
 
 	BST(): data(0), left(nullptr), right(nullptr) {}
-
 	explicit BST(int dataI) : data(dataI), left(nullptr), right(nullptr) {}
 
 
@@ -75,12 +76,38 @@ public:
 	}
 
 	void inorderTraversal(BST* root) {
-		if (!root) {
-			return;
-		}
+		if (!root)return;
 
 		inorderTraversal(root->left);
 		std::cout << root->data << " ";
 		inorderTraversal(root->right);
+	}
+
+	void preorderTraversal(BST* root) {
+		if (!root) return;
+
+		std::cout << root->data << " ";
+		preorderTraversal(root->left);
+		preorderTraversal(root->right);
+	}
+
+	void levelOrderTraversal(BST* root) {
+		if (root == nullptr) {
+			return;
+		}
+
+		std::queue<BST*> queue;
+		queue.push(root);
+		while (!queue.empty()) {
+			BST* frontEl = queue.front();
+			queue.pop();
+			std::cout << frontEl->data << std::endl;
+			if (frontEl->left) {
+				queue.push(frontEl->left);
+			}
+			if (frontEl->right) {
+				queue.push(frontEl->right);
+			}
+		}
 	}
 };

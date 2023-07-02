@@ -150,6 +150,7 @@
     <ClInclude Include="structures\avl_tree.h" />
     <ClInclude Include="structures\bin_ind_tree.h" />
     <ClInclude Include="structures\black_red_tree.h" />
+    <ClInclude Include="structures\compressed_trie.h" />
     <ClInclude Include="structures\disjoint_set.h" />
     <ClInclude Include="structures\hash_map.h" />
     <ClInclude Include="structures\k_d_tree.h" />
