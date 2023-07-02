@@ -92,22 +92,25 @@ public:
 	}
 
 	void levelOrderTraversal(BST* root) {
-		if (root == nullptr) {
-			return;
-		}
-
+		if (root == nullptr) return;
+		
 		std::queue<BST*> queue;
 		queue.push(root);
 		while (!queue.empty()) {
-			BST* frontEl = queue.front();
-			queue.pop();
-			std::cout << frontEl->data << std::endl;
-			if (frontEl->left) {
-				queue.push(frontEl->left);
+
+			int len = queue.size();
+			for (int i = 0; i < len; i++) {
+				BST* frontEl = queue.front();
+				std::cout << frontEl->data << std::endl;
+				queue.pop();
+				if (frontEl->left) {
+					queue.push(frontEl->left);
+				}
+				if (frontEl->right) {
+					queue.push(frontEl->right);
+				}
 			}
-			if (frontEl->right) {
-				queue.push(frontEl->right);
-			}
+			
 		}
 	}
 };
