@@ -19,10 +19,7 @@ private:
 public:
 	static const std::size_t DEFAULT_CAP = 100;
 	MinHeap() : heap(std::vector<PriorityItem>()), capacity(DEFAULT_CAP) {}
-	MinHeap(int cap): capacity(cap) {}
-	MinHeap(const std::vector<PriorityItem>& array) : heap(array) {
-		//balance
-	}
+	MinHeap(int cap) : capacity(cap) {}
 
 
 	void swap(int index1, int index2) {

@@ -1,8 +1,9 @@
 #pragma once
 #include<iostream>
-#include "../mem/named_ptr.h"
 
 const char* INVALID_INDEX = "Index out of range";
+
+
 
 template <typename T>
 class SinglyLinkedList {
@@ -10,15 +11,13 @@ private:
 	class Node {
 	public:
 		T data;
-		NamedPtr<Node> next;
+		Node* next;
 
 		Node() : next(nullptr) {}
-
-
 		explicit Node(T data) : data(data), next(nullptr) {}
 
 	};
-	NamedPtr<Node> head;
+	Node* head;
 	int len;
 public:
 
@@ -30,8 +29,8 @@ public:
 	}
 
 	void push(T data) {
-		NamedPtr<Node> newNode(new Node(data));
-		NamedPtr<Node> temp(head);
+		Node* newNode(new Node(data));
+		Node* temp(head);
 
 		len++;
 
@@ -136,7 +135,7 @@ public:
 			std::cout << "]" << std::endl;
 			return;
 		}
-		NamedPtr<Node> temp = head;
+		Node* temp = head;
 		while (temp != nullptr) {
 			std::cout << temp->data << ", ";
 			temp = temp->next;
@@ -144,4 +143,26 @@ public:
 
 		std::cout << "\b\b]" << std::endl;
 	};
+};
+
+
+template <typename T>
+class DoublyLinkedList {
+
+private:
+	class Node {
+	public:
+		T data;
+		Node* next;
+		Node* prev;
+
+		Node() : next(nullptr), prev(nullptr) {}
+		explicit Node(T data) : data(data), next(nullptr) prev(nullptr) {}
+
+	};
+	Node* head;
+	int len;
+
+	DoublyLinkedList() : head(nullptr), len(0) {}
+
 };
