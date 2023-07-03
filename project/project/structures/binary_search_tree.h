@@ -45,9 +45,8 @@ public:
 
 
 	BST* deleteNode(BST* root, int nodeToDelete) {
-		if (!root) {
-			return NULL;
-		}
+		if (!root) return nullptr;
+
 		if (nodeToDelete < root->data) {
 			root->left = deleteNode(root->left, nodeToDelete);
 		}
@@ -56,7 +55,7 @@ public:
 		}
 		else {
 			if (root->left == nullptr && root->right == nullptr) {
-				return NULL;
+				return nullptr;
 			}
 			else if (root->left == nullptr) {
 				BST* temp = root->right;

@@ -125,7 +125,6 @@ private:
 		this->buckets = std::move(newBuckets);
 
 	}
-
 };
 
 
