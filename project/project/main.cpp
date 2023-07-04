@@ -4,7 +4,7 @@
 
 #include "./structures/binary_search_tree.h"
 #include <iostream>
-#include <cstdlib> // Include the library for rand()
+#include <cstdlib> 
 
 int main(void)
 {
