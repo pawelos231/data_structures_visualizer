@@ -67,8 +67,38 @@ public:
 		return this->balance(node);
 	};
 
-	AVLTree* remove(T value) {
+	AVLTree* remove(AVLTree* root, T value) {
+		if (node == nullptr)
+			return nullptr;
 
+		if (value < node->data) {
+			node->left = remove(node->left, value);
+		}
+		else if (value > node->data) {
+			node->right = remove(node->right, value);
+		}
+		else {
+			if (root->left == nullptr && root->right == nullptr) {
+				return nullptr;
+			}
+
+			else if (root->left == nullptr) {
+				AVLTree* temp = root->right;
+				delete root;
+				return temp;
+			}
+			else if (root->right == nullptr) {
+				AVLTree* temp = root->left;
+				delete root;
+				return temp;
+			}
+			else {
+				AVLTree* temp = this->findMinValue(root);
+				root->data = temp->data;
+				root->right = deleteNode(root->right, node->data);
+			}
+		}
+		return this->balance(root);
 	};
 
 	AVLTree* search(AVLTree* node, T value) {
