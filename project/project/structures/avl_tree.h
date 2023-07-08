@@ -1,6 +1,7 @@
 #pragma once
-#include <algorithm>
 #include <queue>
+#include <iostream>
+#include <algorithm> 
 
 
 //bf = h_l - h_r
@@ -24,7 +25,7 @@ public:
 
 	int const getBalance(AVLTree* node) const {
 		if (node == nullptr) return 0;
-		return this.getHeight(node->left) - this.getHeight(node->right);
+		return this->getHeight(node->left) - this->getHeight(node->right);
 	};
 
 	AVLTree* const leftRotate(AVLTree* node) {
@@ -57,25 +58,25 @@ public:
 
 	AVLTree* insert(AVLTree* node, T value) {
 		if (node == nullptr) return new AVLTree(value);
-
 		if (value > node->data) {
-			insert(node->right, value);
+			node->right = insert(node->right, value);
 		}
 		if (value < node->data) {
-			insert(node->left, value);
+			node->left = insert(node->left, value);
 		}
+		this->updateHeight(node);
 		return this->balance(node);
 	};
 
 	AVLTree* remove(AVLTree* root, T value) {
-		if (node == nullptr)
+		if (root == nullptr)
 			return nullptr;
 
-		if (value < node->data) {
-			node->left = remove(node->left, value);
+		if (value < root->data) {
+			root->left = remove(root->left, value);
 		}
-		else if (value > node->data) {
-			node->right = remove(node->right, value);
+		else if (value > root->data) {
+			root->right = remove(root->right, value);
 		}
 		else {
 			if (root->left == nullptr && root->right == nullptr) {
@@ -95,7 +96,7 @@ public:
 			else {
 				AVLTree* temp = this->findMinValue(root);
 				root->data = temp->data;
-				root->right = deleteNode(root->right, node->data);
+				root->right = deleteNode(root->right, temp->data);
 			}
 		}
 		return this->balance(root);
@@ -114,11 +115,11 @@ public:
 
 
 	void updateHeight(AVLTree* node) {
-		node->height  =
-		1 + std::max(this->getHeight(node.left), this->getHeight(node.right))
+		node->height = std::max(getHeight(node->left), getHeight(node->right));
 	}
 
 	AVLTree* balance(AVLTree* node) {
+		this->updateHeight(node);
 		node->height = this->getHeight(node);
 		int balance = this->getBalance(node);
 
@@ -134,8 +135,9 @@ public:
 		}
 		if (balance > 1 && this->getBalance(node->left) < 0) {
 			node->left = leftRotate(node->left);
-			return rightRotate(node);
+			return this->rightRotate(node);
 		}
+		return node;
 	}
 
 	AVLTree* findMinValue(AVLTree* root) {

@@ -2,25 +2,25 @@
 #define _CRT_SECURE_NO_DEPRECATE
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "./structures/binary_search_tree.h"
+#include "./structures/avl_tree.h"
 #include <iostream>
 #include <cstdlib> 
 
 int main(void)
 {
-	BST* bst = new BST(1);
+	AVLTree<int>* avl = new AVLTree<int>(1);
 
-	bst->insertNode(bst, 10);
-	bst->insertNode(bst, 143);
-	bst->insertNode(bst, 12);
-	bst->insertNode(bst, 13);
-	bst->insertNode(bst, 1421);
-	bst->insertNode(bst, 2);
-	bst->insertNode(bst, 142);
-	bst->insertNode(bst, 5);
+	avl->insert(avl, 10);
+	avl->insert(avl, 143);
+	avl->insert(avl, 12);
+	avl->insert(avl, 13);
+	avl->insert(avl, 1421);
+	avl->insert(avl, 2);
+	avl->insert(avl, 142);
+	avl->insert(avl, 5);
 
 
-	bst->levelOrderTraversal(bst);
+	avl->inorderTraversal(avl);
 
 	return 0;
 }

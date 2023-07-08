@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="algorithms\heapSort.h" />
     <ClInclude Include="algorithms\kruskal.h" />
+    <ClInclude Include="helpers\tree_wrapper.h" />
     <ClInclude Include="structures\avl_tree.h" />
     <ClInclude Include="structures\bin_ind_tree.h" />
     <ClInclude Include="structures\black_red_tree.h" />

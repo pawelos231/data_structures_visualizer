@@ -83,5 +83,8 @@
     <ClInclude Include="structures\compressed_trie.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="helpers\tree_wrapper.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
