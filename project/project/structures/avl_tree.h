@@ -3,6 +3,8 @@
 #include <queue>
 
 
+//bf = h_l - h_r
+
 template <typename T>
 class AVLTree {
 
@@ -52,6 +54,7 @@ public:
 
 		return root;
 	};
+
 	AVLTree* insert(AVLTree* node, T value) {
 		if (node == nullptr) return new AVLTree(value);
 
@@ -61,27 +64,47 @@ public:
 		if (value < node->data) {
 			insert(node->left, value);
 		}
-		return node;
+		return this->balance(node);
 	};
+
 	AVLTree* remove(T value) {
 
 	};
-	AVLTree* search(T value) {};
+
+	AVLTree* search(AVLTree* node, T value) {
+		if (node == nullptr || node->data == value)
+			return node;
+
+		if (value < node->data)
+			return search(node->left, value);
+
+		return search(node->right, value);
+	}
 
 
 
 	void updateHeight(AVLTree* node) {
 		node->height  =
-		std::max(this->getHeight(node.left), this->getHeight(node.right))
+		1 + std::max(this->getHeight(node.left), this->getHeight(node.right))
 	}
 
 	AVLTree* balance(AVLTree* node) {
 		node->height = this->getHeight(node);
-		int balance = this->getBalance(node) + 1;
+		int balance = this->getBalance(node);
 
 		if (balance > 1 && this->getBalance(node->left) >= 0) {
+			return this->rightRotate(node);
+		}
+		if (balance < -1 && this->getBalance(node->right) <= 0) {
+			return this->leftRotate(node);
+		}
+		if (balance < -1 && this->getBalance(node->right) > 0) {
+			node->right = this->rightRotate(node->right);
+			return this->leftRotate(node);
+		}
+		if (balance > 1 && this->getBalance(node->left) < 0) {
+			node->left = leftRotate(node->left);
 			return rightRotate(node);
-
 		}
 	}
 
