@@ -17,9 +17,8 @@ public:
 
 
 	BST* insertNode(BST* root, int data) {
-		if (!root) {
-			return new BST(data);
-		}
+		if (!root) return new BST(data);
+	
 		if (data > root->data) {
 			root->right = insertNode(root->right, data);
 		}
