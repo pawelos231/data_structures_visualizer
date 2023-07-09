@@ -3,8 +3,11 @@
 #include <iostream>
 #include <algorithm> 
 
-
+//BALANCE FACTOR:
 //bf = h_l - h_r
+
+
+
 
 template <typename T>
 class AVLTree {
