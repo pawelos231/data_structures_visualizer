@@ -122,7 +122,7 @@ private:
 			}
 
 			node->setEnd(false);
-			return node->hasChildren();
+			return !node->hasChildren();
 		}
 
 		char ch = word[depth];
@@ -130,15 +130,13 @@ private:
 		if (!child) {
 			return false;
 		}
-
 		bool shouldDeleteChild = removeHelper(child, word, depth + 1);
 		if (shouldDeleteChild) {
 			node->deleteChild(ch);
-			return !node->isEnd() && node->hasChildren();
+			delete child;
+			return !node->isEnd() && !node->hasChildren();
 		}
 
 		return false;
 	}
-
-
 };
