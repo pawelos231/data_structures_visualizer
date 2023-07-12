@@ -14,10 +14,10 @@ Use cases:
 class TrieNode {
 private:
 	std::map<char, TrieNode*> children;
-	int wordCount;
+	bool isEndOfWord;
 
 public:
-	TrieNode(): wordCount(0) {}
+	TrieNode(): isEndOfWord(false) {}
 
 	bool containsKey(char ch) const {
 		return this->children.find(ch) != this->children.end();
@@ -39,19 +39,15 @@ public:
 	}
 
 	std::map<char, TrieNode*> getChildren() {
-		return this->children;
+		return children;
 	}
 
 	bool isEnd() const {
-		return this->wordCount >= 1;
+		return isEndOfWord;
 	}
 
-	void setWordCount(int val) {
-		this->wordCount = val;
-	}
-
-	int getWordCount() {
-		return this->wordCount;
+	void setEnd(bool value) {
+		isEndOfWord = value;
 	}
 
 	bool hasChildren() const {
@@ -83,7 +79,7 @@ public:
 				node = node->getChild(ch);
 			}
 		}
-		node->setWordCount(node->getWordCount() + 1);
+		node->setEnd(true);
 	}
 
 	bool search(const std::string& word) {
@@ -109,25 +105,40 @@ public:
 		}
 		return true;
 	}
+
+	void remove(const std::string& word) {
+		removeHelper(root, word, 0);
+	}
+
 private:
-	bool deleteWord(const std::string& word) {
-		if (!search(word)) {
+	bool removeHelper(TrieNode* node, const std::string& word, int depth) {
+		if (!node) {
 			return false;
 		}
 
-		TrieNode* current = root;
+		if (depth == word.size()) {
+			if (!node->isEnd()) {
+				return false;
+			}
 
-		for (char ch : word) {
-			current = current->getChild(ch);
+			node->setEnd(false);
+			return node->hasChildren();
 		}
 
-		current->setWordCount(current->getWordCount() - 1);
-
-		if (current->getWordCount() == 0 && !current->hasChildren()) {
-			//deleteNode(current); i need to come up with something recursive, beacuse of that for now i mark it as a private
+		char ch = word[depth];
+		TrieNode* child = node->getChild(ch);
+		if (!child) {
+			return false;
 		}
 
-		return true;
+		bool shouldDeleteChild = removeHelper(child, word, depth + 1);
+		if (shouldDeleteChild) {
+			node->deleteChild(ch);
+			return !node->isEnd() && node->hasChildren();
+		}
+
+		return false;
 	}
+
 
 };
