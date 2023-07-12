@@ -1,7 +1,6 @@
 #include <iostream>
 #include <map>
 
-
 /*
 Use cases:
 
@@ -15,10 +14,10 @@ Use cases:
 class TrieNode {
 private:
 	std::map<char, TrieNode*> children;
-	bool endOfWord;
+	int wordCount;
 
 public:
-	TrieNode(): endOfWord(false) {}
+	TrieNode(): wordCount(0) {}
 
 	bool containsKey(char ch) const {
 		return this->children.find(ch) != this->children.end();
@@ -44,11 +43,23 @@ public:
 	}
 
 	bool isEnd() const {
-		return this->endOfWord;
+		return this->wordCount >= 1;
 	}
 
-	void setEnd(bool value) {
-		this->endOfWord = value;
+	void setWordCount(int val) {
+		this->wordCount = val;
+	}
+
+	int getWordCount() {
+		return this->wordCount;
+	}
+
+	bool hasChildren() const {
+		return !children.empty();
+	}
+
+	void deleteChild(char ch) {
+		children.erase(ch);
 	}
 };
 
@@ -66,13 +77,13 @@ public:
 
 		for (auto ch : word) {
 			if (!node->containsKey(ch)) {
-				std::cout << ch << std::endl;
 				node = node->insertChild(ch);
 			}
 			else {
 				node = node->getChild(ch);
 			}
 		}
+		node->setWordCount(node->getWordCount() + 1);
 	}
 
 	bool search(const std::string& word) {
@@ -81,9 +92,7 @@ public:
 			if (node->containsKey(ch)) {
 				node = node->getChild(ch);
 			}
-			else {
-				return false;
-			}
+			else return false;
 		}
 		return node->isEnd() ? true : false;
 	}
@@ -98,6 +107,26 @@ public:
 				return false;
 			}
 		}
+		return true;
+	}
+private:
+	bool deleteWord(const std::string& word) {
+		if (!search(word)) {
+			return false;
+		}
+
+		TrieNode* current = root;
+
+		for (char ch : word) {
+			current = current->getChild(ch);
+		}
+
+		current->setWordCount(current->getWordCount() - 1);
+
+		if (current->getWordCount() == 0 && !current->hasChildren()) {
+			//deleteNode(current); i need to come up with something recursive, beacuse of that for now i mark it as a private
+		}
+
 		return true;
 	}
 

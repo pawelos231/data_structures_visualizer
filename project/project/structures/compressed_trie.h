@@ -1,6 +1,6 @@
 
 
-
+//it is pretty much trie, but compressed, so often instead of singular letters you would get substrings of a given word as a node
 
 /*
 Use cases:
