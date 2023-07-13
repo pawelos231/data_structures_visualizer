@@ -18,7 +18,7 @@ private:
 		}
 	}
 
-	int find(int x) {
+	const int find(int x) {
 
 		if (x < 0 || x >= size) {
 			throw std::out_of_range("Index out of bounds");
@@ -53,7 +53,7 @@ private:
 
 	}
 
-	bool sameSet(int a, int b) {
+	const bool sameSet(int a, int b) {
 		return find(a) == find(b);
 	}
 };

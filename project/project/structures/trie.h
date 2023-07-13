@@ -19,7 +19,7 @@ private:
 public:
 	TrieNode(): isEndOfWord(false) {}
 
-	bool containsKey(char ch) const {
+	const bool containsKey(char ch) const {
 		return this->children.find(ch) != this->children.end();
 	}
 
@@ -38,11 +38,11 @@ public:
 		return newNode;
 	}
 
-	std::map<char, TrieNode*> getChildren() {
+	const std::map<char, TrieNode*> getChildren() {
 		return children;
 	}
 
-	bool isEnd() const {
+	const bool isEnd() const {
 		return isEndOfWord;
 	}
 
@@ -50,7 +50,7 @@ public:
 		isEndOfWord = value;
 	}
 
-	bool hasChildren() const {
+	const bool hasChildren() const {
 		return !children.empty();
 	}
 

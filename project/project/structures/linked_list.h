@@ -24,7 +24,7 @@ public:
 	SinglyLinkedList() : head(nullptr), len(0) {}
 
 
-	int length() const {
+	const int length() const {
 		return len;
 	}
 
@@ -166,7 +166,7 @@ private:
 public:
 	DoublyLinkedList() : head(nullptr), tail(nullptr), len(0) {}
 
-	int length() const {
+	const int length() const {
 		return len;
 	}
 

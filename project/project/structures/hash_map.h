@@ -23,7 +23,7 @@ private:
 	size_t capacity;
 	static const size_t DEFAULT_CAPACITY = 16;
 
-	size_t getBucketIndex(const KeyType& key) const {
+	const size_t getBucketIndex(const KeyType& key) const {
 		return std::hash<KeyType>{}(key) % capacity;
 	};
 
@@ -54,7 +54,7 @@ public:
 		size++;
 	}
 
-	ValueType get(const KeyType& key) const {
+	const ValueType get(const KeyType& key) const {
 
 		size_t bucketIndex = this->getBucketIndex(key);
 
@@ -81,15 +81,15 @@ public:
 
 	}
 
-	size_t getSize() const {
+	const size_t getSize() const {
 		return size;
 	}
 
-	bool isEmpty() const {
+	const bool isEmpty() const {
 		return size == 0;
 	}
 
-	size_t getCapacity() const{
+	const size_t getCapacity() const{
 		return this->capacity;
 	}
 

@@ -12,7 +12,7 @@ public:
 		elements.push_back(element);
 	}
 
-	T pop() {
+	const T pop() {
 		if (empty()) {
 			throw std::out_of_range("Stack is empty");
 		}
@@ -21,18 +21,18 @@ public:
 		return element;
 	}
 
-	T top() const {
+	const T top() const {
 		if (empty()) {
 			throw std::out_of_range("Stack is empty");
 		}
 		return elements.back();
 	}
 
-	size_t size() const {
+	const size_t size() const {
 		return elements.size();
 	}
 
-	bool empty() const {
+	const bool empty() const {
 		return elements.empty();
 	}
 };

@@ -54,16 +54,16 @@ public:
 		}
 	}
 
-	int getParentIndex(int childIndex) {
+	const int getParentIndex(int childIndex) const {
 		return (childIndex - 1) / 2;
 	}
 
 
-	int getRightChildIndex(int parentIndex) {
+	const int getRightChildIndex(int parentIndex) const {
 		return 2 * parentIndex + 2;
 	}
 
-	int getLeftChildIndex(int parentIndex) {
+	const int getLeftChildIndex(int parentIndex) const {
 		return 2 * parentIndex + 1;
 	}
 
@@ -104,7 +104,7 @@ public:
 		}
 	}
 
-	bool isEmpty() const {
+	const bool isEmpty() const {
 		return heap.empty();
 	}
 

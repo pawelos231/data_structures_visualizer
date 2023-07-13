@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+
+
 template <typename T>
 class QueueArrayBased {
 private:
@@ -14,6 +16,7 @@ public:
 		if (this->empty()) {
 			throw std::out_of_range("Queue is empty");
 		}
+
 		T frontElement = queue.front();
 		this->queue.erase(this->queue.begin());
 		return frontElement;
@@ -21,9 +24,10 @@ public:
 
 
 	const T front() const {
-		if (empty()) {
+		if (this->empty()) {
 			throw std::out_of_range("Queue is empty");
 		}
+
 		return this->queue.front();
 	}
 
