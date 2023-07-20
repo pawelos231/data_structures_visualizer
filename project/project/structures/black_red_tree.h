@@ -27,7 +27,7 @@ public:
 
 	void insert(T value) {
 		root = insertNode(root, value);
-		root->color = BLACK; // Root must always be black.
+		root->color = BLACK; 
 	}
 
 	void remove(T value) {
@@ -68,7 +68,6 @@ private:
 			node->right->parent = node;
 		}
 
-		// Check and fix violations
 		if (node->left && node->left->color == RED && node->left->left && node->left->left->color == RED) {
 			return handleRedRedViolation(node, true);
 		}
@@ -91,39 +90,32 @@ private:
 		Node* uncle = (leftChildIsRed) ? node->right : node->left;
 
 		if (uncle && uncle->color == RED) {
-			// Recoloring
 			grandparent->color = RED;
 			parent->color = BLACK;
 			uncle->color = BLACK;
 
-			// Recurse to fix violations higher up
 			return insertNode(grandparent, parent->data);
 		}
 		else {
 			if (leftChildIsRed) {
 				if (node == grandparent->left) {
-					// Left-Left case
 					grandparent = rightRotate(grandparent);
 				}
 				else {
-					// Left-Right case
 					parent = leftRotate(parent);
 					grandparent->left = parent;
 				}
 			}
 			else {
 				if (node == grandparent->right) {
-					// Right-Right case
 					grandparent = leftRotate(grandparent);
 				}
 				else {
-					// Right-Left case
 					parent = rightRotate(parent);
 					grandparent->right = parent;
 				}
 			}
 
-			// Recoloring
 			parent->color = BLACK;
 			grandparent->color = RED;
 
@@ -201,14 +193,14 @@ private:
 				Node* temp = node->right;
 				delete node;
 				temp->parent = node->parent;
-				temp->color = BLACK; // Replaced node is red or has a red child
+				temp->color = BLACK;
 				return temp;
 			}
 			else if (!node->right) {
 				Node* temp = node->left;
 				delete node;
 				temp->parent = node->parent;
-				temp->color = BLACK; // Replaced node is red or has a red child
+				temp->color = BLACK; 
 				return temp;
 			}
 			else {
@@ -218,7 +210,6 @@ private:
 			}
 		}
 
-		// Fix the tree after deletion
 		if (node->left && node->left->color == RED) {
 			return handleRedRedViolationAfterDeletion(node, true);
 		}
@@ -246,7 +237,7 @@ private:
 
 		Node* parent = node->parent;
 		if (!parent) {
-			return node; // The tree is fixed
+			return node; 
 		}
 
 		Node* parentSibling = (parent->left == node) ? parent->right : parent->left;
